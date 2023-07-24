@@ -1,16 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menu_check_notifications"
-        android:title="Check Notifications"
-        android:icon="@drawable/notification" />
-
-    <item
         android:id="@+id/menu_send_notification"
-        android:title="Send Notification"
         android:icon="@drawable/send" />
 
     <item
+        android:id="@+id/menu_check_notifications"
+        android:icon="@drawable/notification" />
+
+    <item
         android:id="@+id/menu_user_profile"
-        android:title="User Profile"
         android:icon="@drawable/profile" />
 </menu>
