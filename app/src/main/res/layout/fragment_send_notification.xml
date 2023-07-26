@@ -64,8 +64,11 @@
     <!-- Send Button -->
     <Button
         android:id="@+id/sendNotificationButton"
+        style="@style/button_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="12dp"
         android:text="Send Notification" />
 
 </LinearLayout>
