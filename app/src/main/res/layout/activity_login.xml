@@ -29,9 +29,11 @@
         android:layout_marginEnd="18dp"
         android:backgroundTint="@color/white"
         android:hint="Username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        android:inputType="text"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -58,5 +60,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
+
+    <CheckBox
+        android:id="@+id/loginAsAdminCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login as Admin"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="18dp"
+        android:checked="false" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
