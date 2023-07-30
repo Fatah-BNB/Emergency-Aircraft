@@ -10,5 +10,5 @@
 
     <item
         android:id="@+id/menu_user_profile"
-        android:icon="@drawable/profile" />
+        android:icon="@drawable/admin_panel_" />
 </menu>
