@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "790421693033",
+    "firebase_url": "https://emergencyaicraft-default-rtdb.firebaseio.com",
+    "project_id": "emergencyaicraft",
+    "storage_bucket": "emergencyaicraft.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790421693033:android:b22c5243ac49ff1048b8f8",
+        "android_client_info": {
+          "package_name": "com.project.emergencyaircraft"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790421693033-aja42ttu9m9r6cpn2t79vbhf61dn01p4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr2jbv15NGg1SV0A5IhAZy1zbPbW93bsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790421693033-aja42ttu9m9r6cpn2t79vbhf61dn01p4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

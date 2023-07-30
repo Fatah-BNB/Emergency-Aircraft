@@ -10,9 +10,25 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.project.emergencyaircraft.MainActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -26,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private Button loginButton;
     private CheckBox loginAsAdminCheckbox;
+    FirebaseDatabase database;
+    DatabaseReference usersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +51,8 @@ public class LoginActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
-
+        database = FirebaseDatabase.getInstance();
+        usersRef = database.getReference("users");
         usernameEditText = findViewById(R.id.usernameEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
@@ -48,28 +67,45 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-        String username = usernameEditText.getText().toString();
+        String email = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
+        CompletableFuture<String> future = new CompletableFuture<>();
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<User> userList = new ArrayList<>();
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    String phone = userSnapshot.getKey();
+                    User user = userSnapshot.getValue(User.class);
+                    user.setUsername(phone);
+                    userList.add(user);
+                }
+                Optional<User> optionalUser = userList.stream()
+                        .filter(user -> user.getEmail().equals(email))
+                        .findFirst();
 
-        if(loginAsAdminCheckbox.isChecked()){
-            if(username.equals(HARDCODED_USERNAME_ADMIN) && password.equals((HARDCODED_PASSWORD_ADMIN))){
-                Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                startActivity(intent);
-            }else{
-                Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                if (optionalUser.isPresent()) {
+                    User user = optionalUser.get();
+                    if (user.getPassword().equals(password))
+                        if (user.getRole().equals("admin")) {
+                            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    else {
+                        Toast.makeText(LoginActivity.this,"invalid credentials",Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
-        }else{
-            if (username.equals(HARDCODED_USERNAME) && password.equals(HARDCODED_PASSWORD)) {
-                // Successful login, navigate to MainActivity
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish(); // Optional - to prevent the user from going back to the login screen using the back button
-            } else {
-                // Invalid credentials, show an error message (e.g., using a Toast)
-                Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                future.completeExceptionally(databaseError.toException());
             }
-        }
-
-
+        });
     }
 }
