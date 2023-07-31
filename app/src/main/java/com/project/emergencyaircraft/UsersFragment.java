@@ -45,12 +45,30 @@ public class UsersFragment extends Fragment {
         addUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle the logic to add a new user
-                addUser("New User");
+                showAddUserFragment();
             }
         });
 
         return view;
+    }
+
+    private void showAddUserFragment() {
+        AddUserFragment addUserFragment = new AddUserFragment();
+        addUserFragment.setOnUserCreatedListener(new AddUserFragment.OnUserCreatedListener() {
+            @Override
+            public void onUserCreated(String username, String password) {
+                // Handle the user creation logic here
+                // For demonstration, we'll just show a toast message with the new user's details
+                String message = "New User Created:\nUsername: " + username + "\nPassword: " + password;
+                userList.add(new User(username)); // Add the new user to the list
+                userAdapter.notifyDataSetChanged(); // Notify the adapter of the data change
+                // Optionally, you can also save the new user to a database or perform any other required actions.
+            }
+        });
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainer, addUserFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private void addUser(String username) {

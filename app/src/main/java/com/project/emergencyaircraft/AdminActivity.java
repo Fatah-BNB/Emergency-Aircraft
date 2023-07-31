@@ -59,6 +59,16 @@ public class AdminActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        finishAffinity();
+        // Check if there is any fragment in the back stack
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment currentFragment = fragmentManager.findFragmentById(R.id.fragmentContainer);
+        if (currentFragment instanceof AddUserFragment) {
+            // If the current fragment is AddUserFragment, pop the back stack and show UsersFragment
+            fragmentManager.popBackStackImmediate();
+        } else {
+            // If there are no fragments in the back stack or the current fragment is not AddUserFragment, handle back press as usual
+            super.onBackPressed();
+            finishAffinity();
+        }
     }
 }
