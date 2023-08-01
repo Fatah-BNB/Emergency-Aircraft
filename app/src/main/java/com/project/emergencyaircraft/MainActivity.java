@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         user.setEmail("benarab2000@gmail.com");
         user.setPassword("islem123");
         user.setUsername("islem12345");
+        user.setRole("admin");
         myRef.child(user.getUsername()).setValue(user);
         bottomNavView.setOnNavigationItemSelectedListener(this);
 

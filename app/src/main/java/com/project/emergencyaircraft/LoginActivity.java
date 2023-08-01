@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     String phone = userSnapshot.getKey();
                     User user = userSnapshot.getValue(User.class);
+                    assert user != null;
                     user.setUsername(phone);
                     userList.add(user);
                 }
