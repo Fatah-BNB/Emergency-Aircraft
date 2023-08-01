@@ -13,11 +13,13 @@
         android:layout_height="80dp"
         android:layout_marginTop="155dp"
         android:src="@drawable/ic_logo_slogan"
+        style="@style/logo_style"
         app:layout_constraintBottom_toTopOf="@+id/usernameEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread" />
+        app:layout_constraintVertical_chainStyle="spread"
+        />
 
     <EditText
         android:id="@+id/usernameEditText"
@@ -65,10 +67,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="16dp"
-        android:buttonTint="@color/white"
         android:checked="false"
         android:text="Login as Admin"
-        android:textColor="@android:color/white"
+        style="@style/check_style"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 

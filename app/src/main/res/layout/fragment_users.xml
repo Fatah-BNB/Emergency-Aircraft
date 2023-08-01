@@ -8,8 +8,12 @@
 
     <Button
         android:id="@+id/addUserButton"
-        android:layout_width="wrap_content"
+        style="@style/profile_text"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:drawableStart="@android:drawable/ic_input_add"
+        android:drawableTint="@color/white"
         android:text="Add User" />
 
     <androidx.recyclerview.widget.RecyclerView
