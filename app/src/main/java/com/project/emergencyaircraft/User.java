@@ -71,5 +71,7 @@ public class User {
                 ", name='" + fullName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+
+
     }
 }
