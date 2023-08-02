@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         BottomNavigationView bottomNavView = findViewById(R.id.bottomNavView);
         bottomNavView.setOnNavigationItemSelectedListener(this);
 
-        // Set the default selected item to "Check Notifications"
+        // Set the default selected item to "Check Notifications
+        setTitle("Notifications");
         bottomNavView.setSelectedItemId(R.id.menu_check_notifications);
     }
 
@@ -30,12 +31,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         switch (item.getItemId()) {
             case R.id.menu_check_notifications:
                 selectedFragment = new CheckNotificationsFragment();
+                setTitle("Notifications");
                 break;
             case R.id.menu_send_notification:
                 selectedFragment = new SendNotificationFragment();
+                setTitle("Send Notification");
                 break;
             case R.id.menu_user_profile:
                 selectedFragment = new UserProfileFragment();
+                setTitle("Profile");
                 break;
         }
 

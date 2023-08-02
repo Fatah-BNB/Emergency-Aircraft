@@ -20,6 +20,7 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        setTitle("Notifications");
         bottomNavigationView.setSelectedItemId(R.id.action_check_notifications); // Set "Check Notification List" as the default selected item
 
         // Set the default fragment to NotificationsFragment when the AdminActivity is created
@@ -31,9 +32,11 @@ public class AdminActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.action_check_notifications:
                         displayNotificationsFragment();
+                        setTitle("Notifications");
                         return true;
                     case R.id.action_list_users:
                         displayUsersFragment();
+                        setTitle("Users");
                         return true;
                 }
                 return false;
