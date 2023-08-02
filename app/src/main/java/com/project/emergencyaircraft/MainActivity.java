@@ -1,25 +1,31 @@
 package com.project.emergencyaircraft;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences prefs = getSharedPreferences("myApp", Context.MODE_PRIVATE);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
         BottomNavigationView bottomNavView = findViewById(R.id.bottomNavView);
-        User user=new User();
+        User user = new User();
         user.setFullName("islem");
         user.setEmail("benarab2000@gmail.com");
         user.setPassword("islem123");
@@ -45,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 selectedFragment = new SendNotificationFragment();
                 break;
             case R.id.menu_user_profile:
-                selectedFragment = new UserProfileFragment();
+                selectedFragment = new UserProfileFragment(user);
                 break;
         }
 

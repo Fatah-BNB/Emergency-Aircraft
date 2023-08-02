@@ -1,15 +1,20 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <path android:fillColor="#00000000"
+    <path
+        android:fillColor="#00000000"
         android:pathData="M54.407,52.892L55.621,62.3C55.8,63.656 55.89,64.334 56.167,64.916C56.412,65.431 56.762,65.889 57.195,66.26C57.683,66.68 58.314,66.945 59.576,67.475L61.486,68.277C63.353,69.061 64.286,69.452 65.18,69.423C65.968,69.397 66.731,69.144 67.379,68.694C68.114,68.183 68.628,67.312 69.657,65.568V65.568C70.589,63.988 70.336,61.958 68.942,60.765C54.682,48.56 36.076,48.697 21.997,61.112C20.621,62.325 20.398,64.359 21.354,65.925V65.925C22.408,67.654 22.935,68.518 23.678,69.017C24.331,69.457 25.099,69.699 25.887,69.714C26.781,69.73 27.709,69.324 29.564,68.513L30.947,67.908C32.377,67.283 33.092,66.97 33.615,66.471C34.078,66.03 34.43,65.486 34.645,64.885C34.887,64.204 34.881,63.424 34.87,61.863L34.804,53.534M26.02,29.543C30.97,24.494 37.868,21.361 45.497,21.361C53.126,21.361 60.024,24.494 64.974,29.543M57.694,37.725C54.697,34.377 50.343,32.27 45.497,32.27C40.651,32.27 36.296,34.377 33.3,37.725"
-        android:strokeColor="#E4293E" android:strokeLineCap="round"
-        android:strokeLineJoin="round" android:strokeWidth="8"/>
-    <path android:fillColor="#00000000"
+        android:strokeColor="#E4293E"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="8" />
+    <path
+        android:fillColor="#00000000"
         android:pathData="M22.727,10.725L68.272,10.725A12,12 0,0 1,80.272 22.725L80.272,68.27A12,12 0,0 1,68.272 80.27L22.727,80.27A12,12 0,0 1,10.727 68.27L10.727,22.725A12,12 0,0 1,22.727 10.725z"
-        android:strokeColor="#22262F" android:strokeLineJoin="round" android:strokeWidth="8"/>
+        android:strokeColor="#22262F"
+        android:strokeLineJoin="round"
+        android:strokeWidth="8" />
 
 </vector>

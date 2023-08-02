@@ -1,0 +1,24 @@
+<!-- fragment_users.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"> <!-- Set the gravity to center_horizontal -->
+
+    <Button
+        android:id="@+id/addUserButton"
+        style="@style/profile_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:drawableStart="@android:drawable/ic_input_add"
+        android:drawableTint="@color/white"
+        android:text="Add User" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>
