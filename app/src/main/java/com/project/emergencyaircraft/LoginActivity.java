@@ -1,6 +1,6 @@
 package com.project.emergencyaircraft;
 
-import android.annotation.SuppressLint;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,8 +32,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText;
     private EditText passwordEditText;
-    private Button loginButton;
-    private CheckBox loginAsAdminCheckbox;
     FirebaseDatabase database;
     DatabaseReference usersRef;
     SharedPreferences prefs;
@@ -41,39 +39,33 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         database = FirebaseDatabase.getInstance();
         usersRef = database.getReference("users");
-        usernameEditText = findViewById(R.id.usernameEditText);
-        passwordEditText = findViewById(R.id.passwordEditText);
-        loginButton = findViewById(R.id.loginButton);
-        loginAsAdminCheckbox = findViewById(R.id.loginAsAdminCheckbox);
         prefs = getSharedPreferences("myApp", Context.MODE_PRIVATE);
-        usersRef = database.getReference("users");
         String username = prefs.getString("username", null);
-        System.out.println(username);
         if (username != null) {
             usersRef.child(username).get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     DataSnapshot snapshot = task.getResult();
                     // Create user object
                     User user = snapshot.getValue(User.class);
-                    assert user != null;
                     Intent intent;
-                    String userJson = new Gson().toJson(user);
+                    assert user != null;
                     if (user.getRole().equals("admin")) {
                         intent = new Intent(this, AdminActivity.class);
-                        intent.putExtra("user", userJson);
                     } else {
                         intent = new Intent(this, MainActivity.class);
-                        intent.putExtra("user", userJson);
                     }
                     startActivity(intent);
                 }
             });
         } else {
+            supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             setContentView(R.layout.activity_login);
+            usernameEditText = findViewById(R.id.usernameEditText);
+            passwordEditText = findViewById(R.id.passwordEditText);
+            Button loginButton = findViewById(R.id.loginButton);
             loginButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -109,14 +101,15 @@ public class LoginActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString("username", optionalUser.get().getUsername());
                         editor.apply();
+                        Intent intent;
                         if (user.getRole().equals("admin")) {
-                            Intent intent = new Intent(LoginActivity.this, AdminActivity.class);
-                            startActivity(intent);
+                            intent = new Intent(LoginActivity.this, AdminActivity.class);
                         } else {
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                             intent = new Intent(LoginActivity.this, MainActivity.class);
+
                         }
+                        startActivity(intent);
+                        finish();
                     } else {
                         Toast.makeText(LoginActivity.this, "invalid credentials", Toast.LENGTH_SHORT).show();
                     }
