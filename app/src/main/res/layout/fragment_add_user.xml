@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:singleLine="true"
-        android:hint="Username" />
+        android:hint="Nom d'utilisateur" />
 
     <EditText
         android:id="@+id/emailEditText"
@@ -22,7 +22,7 @@
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="Mot de passe"
         android:inputType="textPassword" />
 
     <Button
@@ -31,5 +31,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Create User" />
+        android:text="Créer utilisateur" />
 </LinearLayout>

@@ -13,7 +13,7 @@
         android:layout_margin="16dp"
         android:drawableStart="@android:drawable/ic_input_add"
         android:drawableTint="@color/white"
-        android:text="Add User" />
+        android:text="Ajouter un utilisateur" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
