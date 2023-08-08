@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -97,11 +99,24 @@ public class UsersFragment extends Fragment {
 
     public void deleteUser(int position) {
         // Remove the user from the list
-        usersRef.child(userList.get(position).getUsername()).removeValue();
-        startActivity(new Intent(getActivity(),AdminActivity.class));
-        // Notify the adapter that the data set has changed
-        userAdapter.notifyDataSetChanged();
-
-        Toast.makeText(requireContext(), "User deleted.", Toast.LENGTH_SHORT).show();
+        String usernameToDelete = userList.get(position).getUsername();
+        usersRef.child(usernameToDelete).removeValue()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Data removed from the database, now update the adapter
+                        userList.remove(position);
+                        userAdapter.notifyDataSetChanged();
+                        Toast.makeText(requireContext(), "User deleted.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Handle failure, if needed
+                        Toast.makeText(requireContext(), "Failed to delete user.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
+
 }

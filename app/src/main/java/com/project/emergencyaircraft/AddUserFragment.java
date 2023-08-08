@@ -52,7 +52,9 @@ public class AddUserFragment extends Fragment {
                 user.setRole("user");
                 myRef.child(user.getUsername()).setValue(user);
                 userCreatedListener.onUserCreated(username, password);
-                startActivity(new Intent(getActivity(),AdminActivity.class));
+                if (getFragmentManager() != null) {
+                    getFragmentManager().popBackStack();
+                }
                 Toast.makeText(requireContext(), "User Created.", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getContext(), "some inputs are empty", Toast.LENGTH_SHORT).show();
