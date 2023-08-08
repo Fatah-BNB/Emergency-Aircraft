@@ -1,5 +1,6 @@
 package com.project.emergencyaircraft;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,6 @@ public class AddUserFragment extends Fragment {
     private EditText emailEditText;
 
     private EditText passwordEditText;
-    private Button createUserButton;
 
     public interface OnUserCreatedListener {
         void onUserCreated(String username, String password);
@@ -38,25 +38,24 @@ public class AddUserFragment extends Fragment {
         usernameEditText = view.findViewById(R.id.usernameEditText);
         emailEditText = view.findViewById(R.id.emailEditText);
         passwordEditText = view.findViewById(R.id.passwordEditText);
-        createUserButton = view.findViewById(R.id.createUserButton);
+        Button createUserButton = view.findViewById(R.id.createUserButton);
 
-        createUserButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = usernameEditText.getText().toString();
-                String email = emailEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-                if (!username.isEmpty() && !password.isEmpty() && userCreatedListener != null) {
-                    User user = new User();
-                    user.setEmail(email);
-                    user.setPassword(password);
-                    user.setUsername(username);
-                    user.setRole("user");
-                    myRef.child(user.getUsername()).setValue(user);
-                    userCreatedListener.onUserCreated(username, password);
-                } else {
-                    Toast.makeText(getContext(), "some inputs are empty", Toast.LENGTH_SHORT).show();
-                }
+        createUserButton.setOnClickListener(v -> {
+            String username = usernameEditText.getText().toString();
+            String email = emailEditText.getText().toString();
+            String password = passwordEditText.getText().toString();
+            if (!username.isEmpty() && !password.isEmpty() && userCreatedListener != null) {
+                User user = new User();
+                user.setEmail(email);
+                user.setPassword(password);
+                user.setUsername(username);
+                user.setRole("user");
+                myRef.child(user.getUsername()).setValue(user);
+                userCreatedListener.onUserCreated(username, password);
+                startActivity(new Intent(getActivity(),AdminActivity.class));
+                Toast.makeText(requireContext(), "User Created.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "some inputs are empty", Toast.LENGTH_SHORT).show();
             }
         });
 

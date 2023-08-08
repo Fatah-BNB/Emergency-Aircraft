@@ -2,6 +2,7 @@ package com.project.emergencyaircraft;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,14 +32,13 @@ public class UsersFragment extends Fragment {
 
     private List<User> userList;
     private UserAdapter userAdapter;
-
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference usersRef = database.getReference("users");
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_users, container, false);
         userList=new ArrayList<>();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference usersRef = database.getReference("users");
         usersRef.get().addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
                 DataSnapshot snapshot = task.getResult();
@@ -51,7 +51,6 @@ public class UsersFragment extends Fragment {
                 userAdapter = new UserAdapter(userList, this); // Pass reference to UsersFragment
                 recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
                 recyclerView.setAdapter(userAdapter);
-
                 // Add User Button
                 Button addUserButton = view.findViewById(R.id.addUserButton);
                 addUserButton.setOnClickListener(new View.OnClickListener() {
@@ -98,8 +97,8 @@ public class UsersFragment extends Fragment {
 
     public void deleteUser(int position) {
         // Remove the user from the list
-        userList.remove(position);
-
+        usersRef.child(userList.get(position).getUsername()).removeValue();
+        startActivity(new Intent(getActivity(),AdminActivity.class));
         // Notify the adapter that the data set has changed
         userAdapter.notifyDataSetChanged();
 

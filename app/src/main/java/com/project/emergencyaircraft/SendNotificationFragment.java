@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import androidx.fragment.app.Fragment;
 
@@ -24,6 +27,7 @@ public class SendNotificationFragment extends Fragment {
     private Spinner eventSpinner;
     private TextView dateTextView;
     private TextView timeTextView;
+    private LinearLayout linearLayout;
     private Calendar calendar;
 
     public SendNotificationFragment() {
@@ -40,17 +44,13 @@ public class SendNotificationFragment extends Fragment {
         eventSpinner = view.findViewById(R.id.eventSpinner);
         dateTextView = view.findViewById(R.id.dateTextView);
         timeTextView = view.findViewById(R.id.timeTextView);
+        linearLayout=view.findViewById(R.id.type1Layout);
 
         // Set up the Spinners
         ArrayAdapter<CharSequence> emergencyAdapter = ArrayAdapter.createFromResource(
                 requireContext(), R.array.emergency_types, android.R.layout.simple_spinner_item);
         emergencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         emergencyTypeSpinner.setAdapter(emergencyAdapter);
-
-        ArrayAdapter<CharSequence> eventAdapter = ArrayAdapter.createFromResource(
-                requireContext(), R.array.event_types, android.R.layout.simple_spinner_item);
-        eventAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        eventSpinner.setAdapter(eventAdapter);
 
         // Initialize Calendar instance
         calendar = Calendar.getInstance();
@@ -88,6 +88,42 @@ public class SendNotificationFragment extends Fragment {
                         "\nSelected Date: " + selectedDate + "\nSelected Time: " + selectedTime;
                 Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show();
             }
+        });
+
+        // Set up the OnItemSelectedListener for emergencyTypeSpinner
+        emergencyTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                updateEventSpinner(position);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
+        eventSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                String selected = parent.getItemAtPosition(position).toString();
+
+                if(selected.equals("Sur le aeroport")) {
+                    linearLayout.setVisibility(View.VISIBLE);
+                }
+                else {
+                    linearLayout.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
         });
 
         return view;
@@ -148,5 +184,30 @@ public class SendNotificationFragment extends Fragment {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
         String selectedTime = timeFormat.format(calendar.getTime());
         timeTextView.setText(selectedTime);
+    }
+
+    private void updateEventSpinner(int position) {
+        ArrayAdapter<CharSequence> eventAdapter;
+        switch (position) {
+            case 0:
+                eventAdapter = ArrayAdapter.createFromResource(
+                        requireContext(), R.array.event_types1, android.R.layout.simple_spinner_item);
+                break;
+            case 1:
+                eventAdapter = ArrayAdapter.createFromResource(
+                        requireContext(), R.array.event_types2, android.R.layout.simple_spinner_item);
+                break;
+            case 2:
+                eventAdapter = ArrayAdapter.createFromResource(
+                        requireContext(), R.array.event_types3, android.R.layout.simple_spinner_item);
+                break;
+            default:
+                eventAdapter = ArrayAdapter.createFromResource(
+                        requireContext(), R.array.event_types1, android.R.layout.simple_spinner_item);
+                break;
+        }
+
+        eventAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        eventSpinner.setAdapter(eventAdapter);
     }
 }

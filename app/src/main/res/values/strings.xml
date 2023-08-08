@@ -2,14 +2,30 @@
     <string name="app_name">Emergency Aircraft</string>
 
     <string-array name="emergency_types">
-        <item>Normal</item>
-        <item>Urgent</item>
-        <item>Emergency</item>
+        <item>Impliquant un aeronef</item>
+        <item>Ne impliquant pas un aeronef</item>
+        <item>Evenement Complexe</item>
     </string-array>
 
-    <string-array name="event_types">
-        <item>Event 1</item>
-        <item>Event 2</item>
-        <item>Event 3</item>
+    <string-array name="event_types1">
+        <item>Sur le aeroport</item>
+        <item>Hors le aeroport</item>
+        <item>Urgence Caracterisee</item>
+        <item>Veille Locale</item>
+        <item>Alerte a La Bombe</item>
+        <item>Capture Illicite de aeronef</item>
     </string-array>
+    <string-array name="event_types2">
+        <item>Event 1</item>
+        <item>Alerte a La Bombe</item>
+        <item>Catastrophes Naturelles</item>
+        <item>Marchandise Baugeureuse</item>
+        <item>Evenements de ordre Medical</item>
+    </string-array>
+    <string-array name="event_types3">
+        <item>Accident Avion / Structurea</item>
+        <item>Accident Avion / Installation de Ravitaillement</item>
+        <item>Accident Avion / Avion</item>
+    </string-array>
+
 </resources>
