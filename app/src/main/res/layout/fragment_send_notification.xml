@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<!-- Main content here -->
+    <!-- Main content here -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,7 +52,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dégâts" />
+            android:text="L'etendue des dommages" />
 
         <!-- Damages Text Input -->
         <com.google.android.material.textfield.TextInputEditText
@@ -62,11 +61,12 @@
             android:layout_height="wrap_content"
             android:inputType="text" />
 
+
         <!-- Other Label -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Autre" />
+            android:text="autres informations" />
 
         <!-- Other Text Input -->
         <com.google.android.material.textfield.TextInputEditText
@@ -108,58 +108,70 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nomExploitantEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nom de l'exploitant"
-                /> <!-- Set visibility here -->
+                android:hint="Nom de l'exploitant" /> <!-- Set visibility here -->
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/numeroVolEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Numéro de vol"
-                /> <!-- Set visibility here -->
+                android:hint="Numéro de vol" /> <!-- Set visibility here -->
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/typeAeronefEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Type de aéronef"
-                /> <!-- Set visibility here -->
+                android:hint="Type de aéronef" /> <!-- Set visibility here -->
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/provenanceEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Provenance"
-                /> <!-- Set visibility here -->
+                android:hint="Provenance" /> <!-- Set visibility here -->
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/destinationEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Destination"
-                /> <!-- Set visibility here -->
+                android:hint="Destination" /> <!-- Set visibility here -->
 
-            <EditText
-                android:id="@+id/heureEstimeeEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Heure estimée du crash"
-                /> <!-- Set visibility here -->
+            <!-- Set visibility here -->
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/immatriculationEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Immatriculation"
-                /> <!-- Set visibility here -->
+                android:hint="Immatriculation" /> <!-- Set visibility here -->
 
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/type2Layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PositionsExact" />
 
+            <!-- Damages Text Input -->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/PositionExactEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/heureEstimeeEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Heure estimée du crash" />
+        </LinearLayout>
         <!-- Send Button -->
         <Button
             android:id="@+id/sendNotificationButton"

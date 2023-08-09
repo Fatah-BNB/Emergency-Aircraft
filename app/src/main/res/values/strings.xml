@@ -3,7 +3,7 @@
 
     <string-array name="emergency_types">
         <item>Impliquant un aeronef</item>
-        <item>Ne impliquant pas un aeronef</item>
+        <item>N\'impliquant pas un aeronef</item>
         <item>Evenement Complexe</item>
     </string-array>
 
@@ -16,7 +16,6 @@
         <item>Capture Illicite de aeronef</item>
     </string-array>
     <string-array name="event_types2">
-        <item>Event 1</item>
         <item>Alerte a La Bombe</item>
         <item>Catastrophes Naturelles</item>
         <item>Marchandise Baugeureuse</item>

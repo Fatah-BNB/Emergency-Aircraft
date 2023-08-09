@@ -10,12 +10,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CheckNotificationsFragment extends Fragment {
 
     private List<NotificationItem> notificationList;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference notificationsRef = database.getReference("notifications");
 
     public CheckNotificationsFragment() {
         // Required empty public constructor
@@ -26,8 +33,16 @@ public class CheckNotificationsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         // Initialize the list of notifications (replace this with your actual data)
         notificationList = new ArrayList<>();
-        notificationList.add(new NotificationItem("Emergency 1", "More info about Emergency 1"));
-        notificationList.add(new NotificationItem("Emergency 2", "More info about Emergency 2"));
+        notificationsRef.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                DataSnapshot snapshot = task.getResult();
+                for(DataSnapshot child : snapshot.getChildren()) {
+                    NotificationItem notificationItem = child.getValue(NotificationItem.class);
+                    notificationList.add(notificationItem);
+                    System.out.println(notificationItem.getNomExploitant());
+                }
+            }
+        });
         // Add more notifications if needed
     }
 

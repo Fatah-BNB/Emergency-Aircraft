@@ -30,8 +30,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
         NotificationItem notification = notificationList.get(position);
 
-        holder.emergencyTypeTextView.setText(notification.getEmergencyType());
-        holder.moreInfoTextView.setText(notification.getMoreInfo());
+        holder.emergencyTypeTextView.setText(notification.getNomExploitant());
+        holder.moreInfoTextView.setText(notification.getEmergencyType());
     }
 
     @Override
