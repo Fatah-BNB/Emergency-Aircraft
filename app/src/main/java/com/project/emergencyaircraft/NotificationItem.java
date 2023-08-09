@@ -1,6 +1,9 @@
 package com.project.emergencyaircraft;
 
+import java.util.UUID;
+
 public class NotificationItem {
+    public  UUID id ;
     private String emergencyType;
     private String moreInfo;
     private String eventSpinner;
@@ -36,6 +39,7 @@ public class NotificationItem {
     }
 
     public NotificationItem() {
+
     }
 
     public String getEmergencyType() {
@@ -77,7 +81,6 @@ public class NotificationItem {
     public void setTime(String time) {
         this.time = time;
     }
-
 
 
     public String getNomExploitant() {
@@ -143,6 +146,7 @@ public class NotificationItem {
     public void setPositionExact(String positionExact) {
         PositionExact = positionExact;
     }
+
     public String getOther() {
         return other;
     }

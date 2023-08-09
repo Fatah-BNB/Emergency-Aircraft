@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -26,6 +27,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 public class SendNotificationFragment extends Fragment {
 
@@ -113,14 +115,13 @@ public class SendNotificationFragment extends Fragment {
                 String selectedDate = dateFormat.format(calendar.getTime());
                 String selectedTime = timeFormat.format(calendar.getTime());
                 NotificationItem notification=new NotificationItem();
-
+                notification.id= UUID.randomUUID();
                 notification.setDate(selectedDate);
                 notification.setTime(selectedTime);
                 notification.setEmergencyType(emergencyType);
                 notification.setEventSpinner(event);
                 notification.setOther(otherEditText.getText().toString());
                 notification.setDamages(damagesEditText.getText().toString());
-
                 if(emergencyType.equals("Impliquant un aeronef")) {
                     notification.setNomExploitant(nomExploitantEditText.getText().toString());
                     notification.setNomExploitant(numeroVolEditText.getText().toString());
@@ -128,17 +129,12 @@ public class SendNotificationFragment extends Fragment {
                     notification.setProvenance(provenanceEditText.getText().toString());
                     notification.setProvenance( destinationEditText.getText().toString());
                     notification.setImmatriculation(immatriculationEditText.getText().toString());
-                    if (getFragmentManager() != null) {
-                        getFragmentManager().popBackStack();
-                    }
                 } else if (emergencyType.equals("N\\'impliquant pas un aeronef")) {
 
                     notification.setHeureEstimee(heureEstimeeEditText.getText().toString());
                     notification.setPositionExact(PositionExactEditText.getText().toString());
                 }
-                usersRef.child(notification.getNomExploitant()).setValue(notification);
-                // Display the selected date, time, and other inputs
-
+                usersRef.child(String.valueOf(notification.id)).setValue(notification);
                 Toast.makeText(requireContext(), "notification sent", Toast.LENGTH_LONG).show();
             }
 
