@@ -13,14 +13,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class NotificationsFragment extends Fragment {
 
-    private List<String> notificationList;
+    private List<NotificationItem> notificationList;
     private NotificationAdapter notificationAdapter;
-
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference notificationsRef = database.getReference("notifications");
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,23 +33,32 @@ public class NotificationsFragment extends Fragment {
 
         // Initialize the notification list (you can load it from a database or any other source)
         notificationList = new ArrayList<>();
-        notificationList.add("Notification 1");
-        notificationList.add("Notification 2");
-        notificationList.add("Notification 3");
+        notificationsRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DataSnapshot snapshot = task.getResult();
+                for (DataSnapshot child : snapshot.getChildren()) {
+                    NotificationItem notificationItem = child.getValue(NotificationItem.class);
+                    notificationList.add(notificationItem);
+                }
+                RecyclerView recyclerView = view.findViewById(R.id.notificationRecyclerView);
+                notificationAdapter = new NotificationAdapter(notificationList);
+                recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+                recyclerView.setAdapter(notificationAdapter);
 
-        RecyclerView recyclerView = view.findViewById(R.id.notificationRecyclerView);
-        notificationAdapter = new NotificationAdapter(notificationList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        recyclerView.setAdapter(notificationAdapter);
+                // After fetching the data, set the RecyclerView adapter
+
+            }
+        });
+
 
         return view;
     }
 
     private class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder> {
 
-        private List<String> notifications;
+        private final List<NotificationItem> notifications;
 
-        public NotificationAdapter(List<String> notifications) {
+        public NotificationAdapter(List<NotificationItem> notifications) {
             this.notifications = notifications;
         }
 
@@ -57,7 +71,7 @@ public class NotificationsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
-            String notificationTitle = notifications.get(position);
+            String notificationTitle = notifications.get(position).getDate()+" : "+notifications.get(position).getTime();
             holder.notificationTitle.setText(notificationTitle);
         }
 
@@ -75,18 +89,18 @@ public class NotificationsFragment extends Fragment {
                 deleteButton = itemView.findViewById(R.id.deleteButton);
                 notificationTitle = itemView.findViewById(R.id.notificationTitle);
 
-                deleteButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            notifications.remove(position);
-                            notificationAdapter.notifyItemRemoved(position);
-                        }
+                deleteButton.setOnClickListener(v -> {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                       NotificationItem notificationItem=notifications.get(position);
+                        notificationsRef.child(notificationItem.id).removeValue().isSuccessful();
+                        notificationAdapter.notifyItemRemoved(position);
+                        v.refreshDrawableState();
                     }
                 });
             }
         }
 
     }
+
 }

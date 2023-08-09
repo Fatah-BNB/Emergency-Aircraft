@@ -7,6 +7,7 @@ public class NotificationItem {
     private String emergencyType;
     private String moreInfo;
     private String eventSpinner;
+
     private String date;
     private String time;
     private String other;
@@ -182,5 +183,31 @@ public class NotificationItem {
     public void setDamages(String damages) {
         this.damages = damages;
     }
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
 
+        builder.append("Emergency Type: ").append(emergencyType).append("\n");
+        builder.append("More Info: ").append(moreInfo).append("\n");
+        builder.append("Event: ").append(eventSpinner).append("\n");
+        builder.append("Date: ").append(date).append("\n");
+        builder.append("Time: ").append(time).append("\n");
+
+        if ("Impliquant un aeronef".equals(emergencyType)) {
+            builder.append("Nom Exploitant: ").append(nomExploitant).append("\n");
+            builder.append("Numéro Vol: ").append(numeroVol).append("\n");
+            builder.append("Type Aéronef: ").append(typeAeronef).append("\n");
+            builder.append("Provenance: ").append(provenance).append("\n");
+            builder.append("Destination: ").append(destination).append("\n");
+            builder.append("Immatriculation: ").append(immatriculation).append("\n");
+        } else if ("N\\'impliquant pas un aeronef".equals(emergencyType)) {
+            builder.append("Heure Estimée: ").append(heureEstimee).append("\n");
+            builder.append("Position Exacte: ").append(PositionExact).append("\n");
+        }
+
+        builder.append("Other: ").append(other).append("\n");
+        builder.append("Damages: ").append(damages);
+
+        return builder.toString();
+    }
 }

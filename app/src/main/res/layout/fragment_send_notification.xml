@@ -41,7 +41,7 @@
                 android:layout_marginStart="16dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="Temps"
+                android:text="Heure"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/dateTextView"

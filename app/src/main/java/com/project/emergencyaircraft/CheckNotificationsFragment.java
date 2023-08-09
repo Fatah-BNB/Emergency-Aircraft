@@ -64,12 +64,7 @@ public class CheckNotificationsFragment extends Fragment {
             RecyclerView recyclerView = view.findViewById(R.id.notificationRecyclerView);
             recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-            NotificationAdapter adapter = new NotificationAdapter(notificationList, new NotificationAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(NotificationItem clickedItem) {
-                    showDialog(clickedItem.getEmergencyType(), clickedItem.getDamages() + "\n" + clickedItem.getOther());
-                }
-            });
+            NotificationAdapter adapter = new NotificationAdapter(notificationList, clickedItem -> showDialog(clickedItem.getDate()+" "+clickedItem.getTime(), clickedItem.toString()));
 
             recyclerView.setAdapter(adapter);
         }
@@ -79,12 +74,9 @@ public class CheckNotificationsFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Dismiss the dialog
-                        dialog.dismiss();
-                    }
+                .setPositiveButton("Dismiss", (dialog, which) -> {
+                    // Dismiss the dialog
+                    dialog.dismiss();
                 });
 
         AlertDialog dialog = builder.create();
