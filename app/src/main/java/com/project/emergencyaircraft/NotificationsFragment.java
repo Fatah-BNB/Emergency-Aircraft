@@ -1,22 +1,21 @@
-package com.project.emergencyaircraft;// NotificationsFragment.java
+package com.project.emergencyaircraft;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +25,7 @@ public class NotificationsFragment extends Fragment {
     private NotificationAdapter notificationAdapter;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference notificationsRef = database.getReference("notifications");
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,12 +44,8 @@ public class NotificationsFragment extends Fragment {
                 notificationAdapter = new NotificationAdapter(notificationList);
                 recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
                 recyclerView.setAdapter(notificationAdapter);
-
-                // After fetching the data, set the RecyclerView adapter
-
             }
         });
-
 
         return view;
     }
@@ -71,7 +67,7 @@ public class NotificationsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
-            String notificationTitle = notifications.get(position).getDate()+" : "+notifications.get(position).getTime();
+            String notificationTitle = notifications.get(position).getDate() + " : " + notifications.get(position).getTime();
             holder.notificationTitle.setText(notificationTitle);
         }
 
@@ -92,15 +88,21 @@ public class NotificationsFragment extends Fragment {
                 deleteButton.setOnClickListener(v -> {
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                       NotificationItem notificationItem=notifications.get(position);
-                        notificationsRef.child(notificationItem.id).removeValue().isSuccessful();
-                        notificationAdapter.notifyItemRemoved(position);
-                        v.refreshDrawableState();
+                        NotificationItem notificationItem = notifications.get(position);
+
+                        // Remove the item from Firebase
+                        notificationsRef.child(notificationItem.id).removeValue()
+                                .addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()) {
+                                        new Handler(Looper.getMainLooper()).post(() -> {
+                                            notifications.remove(position);
+                                            notifyItemRemoved(position);
+                                        });
+                                    }
+                                });
                     }
                 });
             }
         }
-
     }
-
 }
