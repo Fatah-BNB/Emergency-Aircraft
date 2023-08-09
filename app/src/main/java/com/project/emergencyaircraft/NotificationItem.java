@@ -1,7 +1,5 @@
 package com.project.emergencyaircraft;
 
-import java.util.UUID;
-
 public class NotificationItem {
     public  String id ;
     private String emergencyType;
@@ -187,11 +185,11 @@ public class NotificationItem {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("Emergency Type: ").append(emergencyType).append("\n");
-        builder.append("More Info: ").append(moreInfo).append("\n");
-        builder.append("Event: ").append(eventSpinner).append("\n");
-        builder.append("Date: ").append(date).append("\n");
-        builder.append("Time: ").append(time).append("\n");
+        builder.append("Type d'urgence : ").append(emergencyType).append("\n");
+//        builder.append("More Info: ").append(moreInfo).append("\n");
+        builder.append("Événement : ").append(eventSpinner).append("\n");
+        builder.append("Date : ").append(date).append("\n");
+        builder.append("Temps : ").append(time).append("\n");
 
         if ("Impliquant un aeronef".equals(emergencyType)) {
             builder.append("Nom Exploitant: ").append(nomExploitant).append("\n");
@@ -205,8 +203,8 @@ public class NotificationItem {
             builder.append("Position Exacte: ").append(PositionExact).append("\n");
         }
 
-        builder.append("Other: ").append(other).append("\n");
-        builder.append("Damages: ").append(damages);
+        builder.append("Autre : ").append(other).append("\n");
+        builder.append("Dégâts : ").append(damages);
 
         return builder.toString();
     }
