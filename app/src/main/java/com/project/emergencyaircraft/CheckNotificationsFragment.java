@@ -67,7 +67,7 @@ public class CheckNotificationsFragment extends Fragment {
             NotificationAdapter adapter = new NotificationAdapter(notificationList, new NotificationAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(NotificationItem clickedItem) {
-                    showDialog(clickedItem.getNomExploitant(), clickedItem.getEmergencyType());
+                    showDialog(clickedItem.getEmergencyType(), clickedItem.getDamages() + "\n" + clickedItem.getOther());
                 }
             });
 
