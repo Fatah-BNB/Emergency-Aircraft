@@ -2,6 +2,7 @@ package com.project.emergencyaircraft;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -136,6 +137,7 @@ public class SendNotificationFragment extends Fragment {
                 }
                 usersRef.child(String.valueOf(notification.id)).setValue(notification);
                 Toast.makeText(requireContext(), "notification sent", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getContext(), MainActivity.class));
             }
 
         });
