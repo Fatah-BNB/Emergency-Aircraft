@@ -1,7 +1,5 @@
 package com.project.emergencyaircraft;
 
-import java.util.UUID;
-
 public class NotificationItem {
     public  String id ;
     private String emergencyType;
@@ -187,15 +185,16 @@ public class NotificationItem {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("Type d'urgence: ").append(emergencyType).append("\n");
-        builder.append("Événement: ").append(eventSpinner).append("\n");
-        builder.append("Date: ").append(date).append("\n");
-        builder.append("Heure: ").append(time).append("\n");
+        builder.append("Type d'urgence : ").append(emergencyType).append("\n");
+//        builder.append("More Info: ").append(moreInfo).append("\n");
+        builder.append("Événement : ").append(eventSpinner).append("\n");
+        builder.append("Date : ").append(date).append("\n");
+        builder.append("Temps : ").append(time).append("\n");
 
         if ("Impliquant un aeronef".equals(emergencyType)) {
-            builder.append("Nom de l'Exploitant: ").append(nomExploitant).append("\n");
-            builder.append("Numéro de Vol: ").append(numeroVol).append("\n");
-            builder.append("Type de l'Aéronef: ").append(typeAeronef).append("\n");
+            builder.append("Nom Exploitant: ").append(nomExploitant).append("\n");
+            builder.append("Numéro Vol: ").append(numeroVol).append("\n");
+            builder.append("Type Aéronef: ").append(typeAeronef).append("\n");
             builder.append("Provenance: ").append(provenance).append("\n");
             builder.append("Destination: ").append(destination).append("\n");
             builder.append("Immatriculation: ").append(immatriculation).append("\n");
@@ -204,8 +203,8 @@ public class NotificationItem {
             builder.append("Position Exacte: ").append(PositionExact).append("\n");
         }
 
-        builder.append("Autres informations: ").append(other).append("\n");
-        builder.append("L'Etendue des Dommages: ").append(damages);
+        builder.append("Autre : ").append(other).append("\n");
+        builder.append("Dégâts : ").append(damages);
 
         return builder.toString();
     }

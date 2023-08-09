@@ -34,7 +34,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         NotificationItem notification = notificationList.get(position);
 
         holder.emergencyTypeTextView.setText(notification.getNomExploitant());
-        holder.moreInfoTextView.setText(notification.getEmergencyType());
+        holder.moreInfoTextView.setText(notification.getEmergencyType() + "\n" +notification.getDate() + " : " + notification.getTime());
 
         // Set click listener on the item
         holder.itemView.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,6 @@
 package com.project.emergencyaircraft;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -67,7 +68,7 @@ public class NotificationsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
-            String notificationTitle = notifications.get(position).getDate() + " : " + notifications.get(position).getTime();
+            String notificationTitle = notifications.get(position).getEmergencyType() + "\n" +notifications.get(position).getDate() + " : " + notifications.get(position).getTime();
             holder.notificationTitle.setText(notificationTitle);
         }
 
@@ -84,6 +85,14 @@ public class NotificationsFragment extends Fragment {
                 super(itemView);
                 deleteButton = itemView.findViewById(R.id.deleteButton);
                 notificationTitle = itemView.findViewById(R.id.notificationTitle);
+
+                itemView.setOnClickListener(v -> {
+                    int pos = getAdapterPosition();
+                    if (pos != RecyclerView.NO_POSITION) {
+                        NotificationItem notificationItem = notifications.get(pos);
+                        showDialog(notificationItem.getDate()+" "+notificationItem.getTime(), notificationItem.toString());
+                    }
+                });
 
                 deleteButton.setOnClickListener(v -> {
                     int position = getAdapterPosition();
@@ -104,5 +113,18 @@ public class NotificationsFragment extends Fragment {
                 });
             }
         }
+    }
+
+    public void showDialog(String title, String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Dismiss", (dialog, which) -> {
+                    // Dismiss the dialog
+                    dialog.dismiss();
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
