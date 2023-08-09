@@ -13,9 +13,12 @@ import java.util.List;
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder> {
 
     private List<NotificationItem> notificationList;
+    private OnItemClickListener listener; // Declare listener interface
 
-    public NotificationAdapter(List<NotificationItem> notificationList) {
+    // Constructor to set the listener
+    public NotificationAdapter(List<NotificationItem> notificationList, OnItemClickListener listener) {
         this.notificationList = notificationList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -32,6 +35,16 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         holder.emergencyTypeTextView.setText(notification.getNomExploitant());
         holder.moreInfoTextView.setText(notification.getEmergencyType());
+
+        // Set click listener on the item
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onItemClick(notification);
+                }
+            }
+        });
     }
 
     @Override
@@ -48,5 +61,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             emergencyTypeTextView = itemView.findViewById(R.id.emergencyTypeTextView);
             moreInfoTextView = itemView.findViewById(R.id.moreInfoTextView);
         }
+    }
+
+    // Define an interface for item click listener
+    public interface OnItemClickListener {
+        void onItemClick(NotificationItem clickedItem);
     }
 }
