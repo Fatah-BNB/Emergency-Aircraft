@@ -3,7 +3,7 @@ package com.project.emergencyaircraft;
 import java.util.UUID;
 
 public class NotificationItem {
-    public  UUID id ;
+    public  String id ;
     private String emergencyType;
     private String moreInfo;
     private String eventSpinner;
@@ -14,6 +14,26 @@ public class NotificationItem {
     private String nomExploitant;
     private String numeroVol;
     private String typeAeronef;
+
+    public NotificationItem(String id, String emergencyType, String moreInfo, String eventSpinner, String date, String time, String other, String damages, String nomExploitant, String numeroVol, String typeAeronef, String provenance, String destination, String heureEstimee, String immatriculation, String positionExact) {
+        this.id = id;
+        this.emergencyType = emergencyType;
+        this.moreInfo = moreInfo;
+        this.eventSpinner = eventSpinner;
+        this.date = date;
+        this.time = time;
+        this.other = other;
+        this.damages = damages;
+        this.nomExploitant = nomExploitant;
+        this.numeroVol = numeroVol;
+        this.typeAeronef = typeAeronef;
+        this.provenance = provenance;
+        this.destination = destination;
+        this.heureEstimee = heureEstimee;
+        this.immatriculation = immatriculation;
+        PositionExact = positionExact;
+    }
+
     private String provenance;
     private String destination;
     private String heureEstimee;

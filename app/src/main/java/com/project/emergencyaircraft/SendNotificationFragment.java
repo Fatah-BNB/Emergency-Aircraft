@@ -115,7 +115,7 @@ public class SendNotificationFragment extends Fragment {
                 String selectedDate = dateFormat.format(calendar.getTime());
                 String selectedTime = timeFormat.format(calendar.getTime());
                 NotificationItem notification=new NotificationItem();
-                notification.id= UUID.randomUUID();
+                notification.id= UUID.randomUUID().toString();
                 notification.setDate(selectedDate);
                 notification.setTime(selectedTime);
                 notification.setEmergencyType(emergencyType);

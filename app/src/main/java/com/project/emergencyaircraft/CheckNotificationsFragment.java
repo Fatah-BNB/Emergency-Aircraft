@@ -39,7 +39,6 @@ public class CheckNotificationsFragment extends Fragment {
                 for(DataSnapshot child : snapshot.getChildren()) {
                     NotificationItem notificationItem = child.getValue(NotificationItem.class);
                     notificationList.add(notificationItem);
-                    System.out.println(notificationItem.getNomExploitant());
                 }
             }
         });
