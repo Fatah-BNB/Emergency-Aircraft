@@ -67,7 +67,7 @@ public class NotificationsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
-            String notificationTitle = notifications.get(position).getDate() + " : " + notifications.get(position).getTime();
+            String notificationTitle = notifications.get(position).getEmergencyType() + "\n" +notifications.get(position).getDate() + " : " + notifications.get(position).getTime();
             holder.notificationTitle.setText(notificationTitle);
         }
 
