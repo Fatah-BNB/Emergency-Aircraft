@@ -48,32 +48,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Damages Label -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="L'etendue des dommages" />
 
-        <!-- Damages Text Input -->
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/damagesEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" />
-
-
-        <!-- Other Label -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="autres informations" />
-
-        <!-- Other Text Input -->
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/otherEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" />
 
         <!-- Emergency Type label -->
         <TextView
@@ -172,6 +147,32 @@
                 android:layout_height="wrap_content"
                 android:hint="Heure estimée du crash" />
         </LinearLayout>
+        <!-- Damages Label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="L'etendue des dommages" />
+
+        <!-- Damages Text Input -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/damagesEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+
+        <!-- Other Label -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="autres informations" />
+
+        <!-- Other Text Input -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/otherEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
         <!-- Send Button -->
         <Button
             android:id="@+id/sendNotificationButton"
