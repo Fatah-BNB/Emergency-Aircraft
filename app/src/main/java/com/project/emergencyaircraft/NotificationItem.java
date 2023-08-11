@@ -189,7 +189,7 @@ public class NotificationItem {
 //        builder.append("More Info: ").append(moreInfo).append("\n");
         builder.append("Événement : ").append(eventSpinner).append("\n");
         builder.append("Date : ").append(date).append("\n");
-        builder.append("Temps : ").append(time).append("\n");
+        builder.append("Heure : ").append(time).append("\n");
 
         if ("Impliquant un aeronef".equals(emergencyType)) {
             builder.append("Nom Exploitant: ").append(nomExploitant).append("\n");
@@ -203,8 +203,8 @@ public class NotificationItem {
             builder.append("Position Exacte: ").append(PositionExact).append("\n");
         }
 
-        builder.append("Autre : ").append(other).append("\n");
-        builder.append("Dégâts : ").append(damages);
+        builder.append("Autres informations : ").append(other).append("\n");
+        builder.append("Étendu des dommages : ").append(damages);
 
         return builder.toString();
     }
