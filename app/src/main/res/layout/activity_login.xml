@@ -11,7 +11,7 @@
         android:layout_width="324dp"
         android:layout_height="80dp"
         android:layout_marginTop="155dp"
-        android:src="@drawable/ic_logo_slogan"
+        android:src="@drawable/logo_with_slogan"
         style="@style/logo_style"
         app:layout_constraintBottom_toTopOf="@+id/usernameEditText"
         app:layout_constraintEnd_toEndOf="parent"

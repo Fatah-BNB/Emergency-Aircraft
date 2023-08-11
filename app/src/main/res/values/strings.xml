@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Emergency Aircraft</string>
+    <string name="app_name">Emergency Air Link</string>
 
     <string-array name="emergency_types">
         <item>Impliquant un aéronef</item>
