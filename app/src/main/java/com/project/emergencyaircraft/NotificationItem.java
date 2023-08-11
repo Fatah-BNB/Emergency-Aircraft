@@ -202,8 +202,8 @@ public class NotificationItem {
             builder.append("Heure Estimée: ").append(heureEstimee).append("\n");
             builder.append("Position Exacte: ").append(PositionExact).append("\n");
         }
-        builder.append("Étendu des dommages : ").append(damages);
-        builder.append("Autres informations : ").append(other).append("\n");
+        builder.append("Étendu des dommages : ").append(damages).append("\n");
+        builder.append("Autres informations : ").append(other);
 
 
         return builder.toString();
